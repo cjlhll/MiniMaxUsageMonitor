@@ -71,6 +71,7 @@ async function updateUsageInfo(): Promise<void> {
   try {
     const config = vscode.workspace.getConfiguration('minimaxUsage');
     const apiKey = config.get<string>('apiKey');
+    const modelName = config.get<string>('modelName', 'MiniMax-M2.7');
     const showNotifications = config.get<boolean>('showNotifications', true);
     
     if (!apiKey) {
@@ -104,12 +105,12 @@ async function updateUsageInfo(): Promise<void> {
 
     const data = await response.json() as ApiResponse;
     
-    const model = data.model_remains.find(m => m.model_name === "MiniMax-M2.7");
+    const model = data.model_remains.find(m => m.model_name === modelName);
     
     if (!model) {
       statusBarItem.text = "$(error) MiniMax: 未找到模型";
-      statusBarItem.tooltip = "未找到MiniMax-M2.7模型";
-      outputChannel.appendLine('未找到MiniMax-M2.7模型');
+      statusBarItem.tooltip = `未找到${modelName}模型`;
+      outputChannel.appendLine(`未找到${modelName}模型`);
       return;
     }
 
@@ -142,7 +143,7 @@ async function updateUsageInfo(): Promise<void> {
     statusBarItem.text = `$(clock) ${remainText} ${usedPercentage}%${weeklyText}`;
 
     statusBarItem.tooltip = new vscode.MarkdownString(
-      `**MiniMax-M2.7 使用情况**\n\n` +
+      `**${modelName} 使用情况**\n\n` +
       `- 使用进度: ${usedPercentage}% (${usedCount.toLocaleString()}/${totalCount.toLocaleString()})\n` +
       `- 剩余时间: ${remainText}后重置\n` +
       `- 周用量: ${weeklyPercentage}% (${weeklyUsed.toLocaleString()}/${weeklyTotal.toLocaleString()})`

@@ -29,19 +29,25 @@
           "description": "MiniMax API密钥",
           "order": 1
         },
+        "minimaxUsage.modelName": {
+          "type": "string",
+          "default": "MiniMax-M2.7",
+          "description": "要监控的模型名称",
+          "order": 2
+        },
         "minimaxUsage.refreshInterval": {
           "type": "number",
           "default": 30,
           "minimum": 10,
           "maximum": 3600,
           "description": "刷新间隔（秒），最小10秒，最大3600秒",
-          "order": 2
+          "order": 3
         },
         "minimaxUsage.showNotifications": {
           "type": "boolean",
           "default": true,
           "description": "是否显示错误通知",
-          "order": 3
+          "order": 4
         }
       }
     }
