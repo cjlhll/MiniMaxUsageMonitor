@@ -1,0 +1,65 @@
+{
+  "name": "minimax-usage-monitor",
+  "displayName": "MiniMax Usage Monitor",
+  "description": "监控MiniMax API使用情况，在状态栏显示剩余次数和时间",
+  "version": "0.0.1",
+  "publisher": "minimax-monitor",
+  "icon": "icon.png",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "minimax-usage.refresh",
+        "title": "刷新MiniMax使用情况"
+      }
+    ],
+    "configuration": {
+      "title": "MiniMax Usage Monitor",
+      "properties": {
+        "minimaxUsage.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "MiniMax API密钥",
+          "order": 1
+        },
+        "minimaxUsage.refreshInterval": {
+          "type": "number",
+          "default": 30,
+          "minimum": 10,
+          "maximum": 3600,
+          "description": "刷新间隔（秒），最小10秒，最大3600秒",
+          "order": 2
+        },
+        "minimaxUsage.showNotifications": {
+          "type": "boolean",
+          "default": true,
+          "description": "是否显示错误通知",
+          "order": 3
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "tsc -p ./ && esbuild ./src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node --minify",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.80.0",
+    "esbuild": "^0.17.0",
+    "typescript": "^4.9.4",
+    "@typescript-eslint/eslint-plugin": "^5.50.0",
+    "@typescript-eslint/parser": "^5.50.0",
+    "eslint": "^8.33.0"
+  }
+}

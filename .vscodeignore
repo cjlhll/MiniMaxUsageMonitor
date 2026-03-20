@@ -1,0 +1,9 @@
+.vscode/**
+.vscode-test/**
+src/**
+.gitignore
+tsconfig.json
+**/*.map
+node_modules/**
+Jochenyang.minimax-status-vscode-1.2.5/**
+minimax-status-main/**
