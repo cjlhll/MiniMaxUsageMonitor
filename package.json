@@ -2,9 +2,13 @@
   "name": "minimax-usage-monitor",
   "displayName": "MiniMax Usage Monitor",
   "description": "监控MiniMax API使用情况，在状态栏显示剩余次数和时间",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "minimax-monitor",
   "icon": "icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/minimax-monitor/minimax-usage-vscode"
+  },
   "engines": {
     "vscode": "^1.80.0"
   },
@@ -18,6 +22,10 @@
       {
         "command": "minimax-usage.refresh",
         "title": "刷新MiniMax使用情况"
+      },
+      {
+        "command": "minimax-usage.selectModel",
+        "title": "选择MiniMax监控模型"
       }
     ],
     "configuration": {
@@ -31,8 +39,8 @@
         },
         "minimaxUsage.modelName": {
           "type": "string",
-          "default": "MiniMax-M2.7",
-          "description": "要监控的模型名称",
+          "default": "",
+          "description": "要监控的模型名称（配置API密钥后可通过命令面板选择）",
           "order": 2
         },
         "minimaxUsage.refreshInterval": {
